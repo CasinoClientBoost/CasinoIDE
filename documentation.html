@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация Casino++ - Официальный сайт</title>
+    <link rel="shortcut icon" href="/icons/CasinoLogo.ico" type="image/ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a2c3d;
+            --secondary: #e9b949;
+            --accent: #d43346;
+            --light: #f5f7fa;
+            --dark: #0d1721;
+            --gray: #a1a8b3;
+            --success: #4caf50;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0d1721 0%, #1a2c3d 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(13, 23, 33, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', serif;
+            font-size: 28px;
+            color: var(--secondary);
+            margin-left: 10px;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 32px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: var(--light);
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-login:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-register {
+            background: var(--accent);
+            color: var(--light);
+        }
+
+        .btn-register:hover {
+            background: #c11e32;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 51, 70, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            color: var(--light);
+            cursor: pointer;
+        }
+
+        /* Documentation Hero */
+        .doc-hero {
+            padding: 180px 0 80px;
+            background: linear-gradient(120deg, #1a2c3d 0%, #0d1721 100%);
+            text-align: center;
+        }
+
+        .doc-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .doc-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--gray);
+        }
+
+        /* Documentation Navigation */
+        .doc-nav {
+            background: rgba(26, 44, 61, 0.7);
+            padding: 20px 0;
+            position: sticky;
+            top: 70px;
+            z-index: 900;
+            backdrop-filter: blur(10px);
+        }
+
+        .doc-nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .doc-nav li a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(13, 23, 33, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .doc-nav li a:hover,
+        .doc-nav li a.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Documentation Content */
+        .doc-content {
+            padding: 60px 0;
+        }
+
+        .doc-section {
+            margin-bottom: 60px;
+            background: rgba(13, 23, 33, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(233, 185, 73, 0.1);
+        }
+
+        .doc-section h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(233, 185, 73, 0.3);
+        }
+
+        .doc-section h3 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin: 30px 0 15px;
+        }
+
+        .doc-section p {
+            margin-bottom: 20px;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .doc-section ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .doc-section li {
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+
+        .code-block {
+            background: rgba(5, 12, 18, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            overflow-x: auto;
+            border-left: 4px solid var(--accent);
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+        }
+
+        .example {
+            background: rgba(26, 44, 61, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 1px solid rgba(233, 185, 73, 0.2);
+        }
+
+        .example h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example h4 i {
+            color: var(--accent);
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(13, 23, 33, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .doc-table th {
+            background: var(--accent);
+            color: white;
+            text-align: left;
+            padding: 15px;
+        }
+
+        .doc-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--gray);
+        }
+
+        .doc-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .doc-table tr:hover {
+            background: rgba(233, 185, 73, 0.1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: rgba(26, 44, 61, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(26, 44, 61, 0.8);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(233, 185, 73, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--secondary);
+            font-size: 28px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(5, 12, 18, 0.95);
+            padding: 50px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            max-width: 250px;
+        }
+
+        .footer-logo h3 {
+            font-family: 'Montserrat', serif;
+            font-size: 28px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--light);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .doc-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .doc-section h2 {
+                font-size: 1.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .doc-hero {
+                padding: 150px 0 60px;
+            }
+            
+            .doc-hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .doc-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .doc-section {
+                padding: 20px;
+            }
+        }
+
+        .hljs {
+            background: transparent !important;
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html"><h1>CasinoIDE</h1></a>
+            </div>
+            <div class="menu">
+                <a href="documentation.html">Документация</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="doc-hero">
+        <div class="container">
+            <h1>Документация по Casino++</h1>
+            <p>Полное руководство по уникальному языку программирования для ценителей азарта и креатива</p>
+        </div>
+    </section>
+
+    <section class="doc-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#intro" class="active">Введение</a></li>
+                <li><a href="#types">Типы данных</a></li>
+                <li><a href="#vars">Переменные</a></li>
+                <li><a href="#ops">Операции</a></li>
+                <li><a href="#io">Ввод/вывод</a></li>
+                <li><a href="#control">Управление</a></li>
+                <li><a href="#arrays">Массивы</a></li>
+                <li><a href="#examples">Примеры</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="doc-content">
+        <div class="container">
+            <!-- Введение -->
+            <div class="doc-section" id="intro">
+                <h2>Введение в Casino++</h2>
+                <p>Casino++ — это эксцентричный язык программирования для истинных ценителей азарта и креатива! Синтаксис сочетает русский сленг, казино-тематику и неожиданные метафоры.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            💻
+                        </div>
+                        <h3>Уникальный синтаксис</h3>
+                        <p>Запоминающиеся ключевые слова вместо сухих технических терминов</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+                        <h3>Высокая скорость</h3>
+                        <p>Скорость выполнения программ сопоставима с Python</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            🎲
+                        </div>
+                        <h3>Казино-тематика</h3>
+                        <p>Все операции представлены в терминах азартных игр</p>
+                    </div>
+                </div>
+                
+                <h3>Обязательный импорт</h3>
+                <p>Каждая программа на Casino++ должна начинаться с импорта библиотеки:</p>
+                <div class="code-block">
+                    <pre><code class="language-casino">ИМПОРТИРОВАТЬ_CASINOCLIENT.CASINO++</code></pre>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-exclamation-circle"></i> Важно</h4>
+                    <p>Без этой строки в начале программы интерпретатор Casino++ откажется выполнять код. Это обязательное требование языка.</p>
+                </div>
+            </div>
+            
+            <!-- Типы данных -->
+            <div class="doc-section" id="types">
+                <h2>Типы данных</h2>
+                <p>Casino++ поддерживает все основные типы данных, необходимые для программирования:</p>
+                
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Тип</th>
+                            <th>Описание</th>
+                            <th>Пример</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ЧИСЛО</code></td>
+                            <td>Целые и дробные числа</td>
+                            <td><code>42</code>, <code>3.14</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>СТРОКА</code></td>
+                            <td>Текстовые данные в двойных кавычках</td>
+                            <td><code>"Джекпот!"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>МАССИВ</code></td>
+                            <td>Коллекции элементов</td>
+                            <td><code>[1, 2, 3, "красное"]</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>САЛАТИК</code></td>
+                            <td>Логические значения (true/false)</td>
+                            <td><code>ВКУСНЫЙ</code> (true), <code>НЕВКУСНЫЙ</code> (false)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Переменные -->
+            <div class="doc-section" id="vars">
+                <h2>Переменные</h2>
+                <p>Объявление переменных в Casino++ может быть как строго типизированным, так и динамическим.</p>
+                
+                <h3>Строго типизированные переменные</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ЧИСЛО баланс ПЖЖПЖПЖ_СТАВЬ_НА 1000;
+СТРОКА имя_игрока ПЖЖПЖПЖ_СТАВЬ_НА "Нурсултан";
+САЛАТИК удача ПЖЖПЖПЖ_СТАВЬ_НА ВКУСНЫЙ;</code></pre>
+                </div>
+                
+                <h3>Динамические переменные</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ставка ПЖЖПЖПЖ_СТАВЬ_НА 500;
+сообщение ПЖЖПЖПЖ_СТАВЬ_НА "Ставка принята!";</code></pre>
+                </div>
+            </div>
+            
+            <!-- Операции -->
+            <div class="doc-section" id="ops">
+                <h2>Операции</h2>
+                <p>Casino++ поддерживает все основные арифметические и логические операции.</p>
+                
+                <h3>Арифметические операции</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">сумма ПЖЖПЖПЖ_СТАВЬ_НА ставка + 100;
+разница ПЖЖПЖПЖ_СТАВЬ_НА баланс - ставка;
+умножение ПЖЖПЖПЖ_СТАВЬ_НА коэффициент * ставка;
+деление ПЖЖПЖПЖ_СТАВЬ_НА джекпот / игроки;</code></pre>
+                </div>
+                
+                <h3>Операции сравнения</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ПРОВЕРИТЬ_НА_НУРСУЛТАН (ставка == максимальная_ставка) { ... }
+ПРОВЕРИТЬ_НА_НУРСУЛТАН (баланс > 0) { ... }
+ПРОВЕРИТЬ_НА_НУРСУЛТАН (выигрыш != 0) { ... }</code></pre>
+                </div>
+                
+                <h3>Конкатенация строк</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">сообщение ПЖЖПЖПЖ_СТАВЬ_НА "Игрок " И_ЕЩЁ_НЕ_ЗАБУДЬ имя И_ЕЩЁ_НЕ_ЗАБУДЬ " выиграл " И_ЕЩЁ_НЕ_ЗАБУДЬ выигрыш И_ЕЩЁ_НЕ_ЗАБУДЬ "!";</code></pre>
+                </div>
+            </div>
+            
+            <!-- Ввод/вывод -->
+            <div class="doc-section" id="io">
+                <h2>Ввод и вывод данных</h2>
+                <p>Взаимодействие с пользователем - важная часть любой программы на Casino++.</p>
+                
+                <h3>Вывод данных</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ЦИТАТУ_НА_ЭКРАН "Добро пожаловать в казино!";
+ЦИТАТУ_НА_ЭКРАН "Ваш баланс: " И_ЕЩЁ_НЕ_ЗАБУДЬ баланс;</code></pre>
+                </div>
+                
+                <h3>Ввод данных</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">СТРОКА имя ПЖЖПЖПЖ_СТАВЬ_НА ЗАПРОСИТЬ_ЦИТАТУ "Введите ваше имя: ";
+ЧИСЛО ставка ПЖЖПЖПЖ_СТАВЬ_НА ЗАПРОСИТЬ_ЦИТАТУ "Сделайте вашу ставку: ";</code></pre>
+                </div>
+                
+                <h3>Случайные числа</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ЧИСЛО рулетка ПЖЖПЖПЖ_СТАВЬ_НА ДЕПАЙ_РУЛЕТКУ(1, 36);
+ЦИТАТУ_НА_ЭКРАН "Выпало число: " И_ЕЩЁ_НЕ_ЗАБУДЬ рулетка;</code></pre>
+                </div>
+            </div>
+            
+            <!-- Управляющие конструкции -->
+            <div class="doc-section" id="control">
+                <h2>Управляющие конструкции</h2>
+                <p>Управление потоком выполнения программы реализовано с использованием казино-тематики.</p>
+                
+                <h3>Условные операторы</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ПРОВЕРИТЬ_НА_НУРСУЛТАН (ставка > баланс) {
+    ЦИТАТУ_НА_ЭКРАН "Недостаточно средств!";
+}
+ПРОВЕРИТЬ_НА_ДРУГОЙ_ЧИТ (ставка == 0) {
+    ЦИТАТУ_НА_ЭКРАН "Ставка не может быть нулевой!";
+}
+ЕСЛИ_НЕТ_НУРСУЛТАНА {
+    баланс ПЖЖПЖПЖ_СТАВЬ_НА баланс - ставка;
+    ЦИТАТУ_НА_ЭКРАН "Ставка принята!";
+}</code></pre>
+                </div>
+                
+                <h3>Циклы</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">// Цикл while
+ПОКА_ДЕПАЕТ (баланс > 0) {
+    // Игровой процесс
+    баланс ПЖЖПЖПЖ_СТАВЬ_НА баланс - 10;
+}
+
+// Цикл for
+ПОКРУТИЛО_ПО_КРУГУ (i ПЖЖПЖПЖ_СТАВЬ_НА [1,2,3,4,5]) {
+    ЦИТАТУ_НА_ЭКРАН "Круг: " И_ЕЩЁ_НЕ_ЗАБУДЬ i;
+}</code></pre>
+                </div>
+                
+                <h3>Завершение программы</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ПРОВЕРИТЬ_НА_НУРСУЛТАН (баланс <= 0) {
+    ЦИТАТУ_НА_ЭКРАН "Игра окончена!";
+    ВЫЙТИ_ОТСЮДА;
+}</code></pre>
+                </div>
+            </div>
+            
+            <!-- Массивы -->
+            <div class="doc-section" id="arrays">
+                <h2>Работа с массивами</h2>
+                <p>Массивы в Casino++ позволяют хранить коллекции данных различных типов.</p>
+                
+                <h3>Создание массивов</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">МАССИВ числа ПЖЖПЖПЖ_СТАВЬ_НА [1, 2, 3, 42];
+МАССИВ цвета_рулетки ПЖЖПЖПЖ_СТАВЬ_НА ["красное", "черное", "зеро"];</code></pre>
+                </div>
+                
+                <h3>Доступ к элементам</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ЧИСЛО первый_элемент ПЖЖПЖПЖ_СТАВЬ_НА числа[0];
+СТРОКА цвет ПЖЖПЖПЖ_СТАВЬ_НА цвета_рулетки[2];</code></pre>
+                </div>
+                
+                <h3>Итерация по массиву</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ПОКРУТИЛО_ПО_КРУГУ (цвет ПЖЖПЖПЖ_СТАВЬ_НА цвета_рулетки) {
+    ЦИТАТУ_НА_ЭКРАН "Возможный выигрыш: " И_ЕЩЁ_НЕ_ЗАБУДЬ цвет;
+}</code></pre>
+                </div>
+            </div>
+            
+            <!-- Примеры программ -->
+            <div class="doc-section" id="examples">
+                <h2>Примеры программ</h2>
+                
+                <h3>Простая игра в рулетку</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ИМПОРТИРОВАТЬ_CASINOCLIENT.CASINO++
+
+ЧИСЛО баланс ПЖЖПЖПЖ_СТАВЬ_НА 1000;
+
+ПОКА_ДЕПАЕТ (баланс > 0) {
+    ЦИТАТУ_НА_ЭКРАН "Ваш баланс: " И_ЕЩЁ_НЕ_ЗАБУДЬ баланс;
+    ЧИСЛО ставка ПЖЖПЖПЖ_СТАВЬ_НА ЗАПРОСИТЬ_ЦИТАТУ "Ваша ставка: ";
+    
+    ПРОВЕРИТЬ_НА_НУРСУЛТАН (ставка > баланс) {
+        ЦИТАТУ_НА_ЭКРАН "Недостаточно средств!";
+        ПРОДОЛЖИТЬ_ИГРУ;
+    }
+    
+    ЧИСЛО результат ПЖЖПЖПЖ_СТАВЬ_НА ДЕПАЙ_РУЛЕТКУ(0, 36);
+    ЦИТАТУ_НА_ЭКРАН "Выпало: " И_ЕЩЁ_НЕ_ЗАБУДЬ результат;
+    
+    ПРОВЕРИТЬ_НА_НУРСУЛТАН (результат == 7) {
+        ЧИСЛО выигрыш ПЖЖПЖПЖ_СТАВЬ_НА ставка * 10;
+        баланс ПЖЖПЖПЖ_СТАВЬ_НА баланс + выигрыш;
+        ЦИТАТУ_НА_ЭКРАН "Джекпот! Вы выиграли: " И_ЕЩЁ_НЕ_ЗАБУДЬ выигрыш;
+    }
+    ЕСЛИ_НЕТ_НУРСУЛТАНА {
+        баланс ПЖЖПЖПЖ_СТАВЬ_НА баланс - ставка;
+        ЦИТАТУ_НА_ЭКРАН "Вы проиграли ставку!";
+    }
+}
+
+ЦИТАТУ_НА_ЭКРАН "Игра окончена! Ваш финальный баланс: " И_ЕЩЁ_НЕ_ЗАБУДЬ баланс;</code></pre>
+                </div>
+                
+                <h3>Угадай число</h3>
+                <div class="code-block">
+                    <pre><code class="language-casino">ИМПОРТИРОВАТЬ_CASINOCLIENT.CASINO++
+
+ЧИСЛО загаданное_число ПЖЖПЖПЖ_СТАВЬ_НА ДЕПАЙ_РУЛЕТКУ(1, 100);
+ЧИСЛО попытки ПЖЖПЖПЖ_СТАВЬ_НА 0;
+ЧИСЛО максимальные_попытки ПЖЖПЖПЖ_СТАВЬ_НА 7;
+
+ЦИТАТУ_НА_ЭКРАН "Угадайте число от 1 до 100! У вас " И_ЕЩЁ_НЕ_ЗАБУДЬ максимальные_попытки И_ЕЩЁ_НЕ_ЗАБУДЬ " попыток.";
+
+ПОКА_ДЕПАЕТ (попытки < максимальные_попытки) {
+    ЧИСЛО попытка ПЖЖПЖПЖ_СТАВЬ_НА ЗАПРОСИТЬ_ЦИТАТУ "Попытка " И_ЕЩЁ_НЕ_ЗАБУДЬ (попытки + 1) И_ЕЩЁ_НЕ_ЗАБУДЬ ": ";
+    попытки ПЖЖПЖПЖ_СТАВЬ_НА попытки + 1;
+    
+    ПРОВЕРИТЬ_НА_НУРСУЛТАН (попытка == загаданное_число) {
+        ЦИТАТУ_НА_ЭКРАН "Поздравляем! Вы угадали за " И_ЕЩЁ_НЕ_ЗАБУДЬ попытки И_ЕЩЁ_НЕ_ЗАБУДЬ " попыток!";
+        ВЫЙТИ_ОТСЮДА;
+    }
+    ПРОВЕРИТЬ_НА_ДРУГОЙ_ЧИТ (попытка < загаданное_число) {
+        ЦИТАТУ_НА_ЭКРАН "Слишком мало!";
+    }
+    ЕСЛИ_НЕТ_НУРСУЛТАНА {
+        ЦИТАТУ_НА_ЭКРАН "Слишком много!";
+    }
+}
+
+ЦИТАТУ_НА_ЭКРАН "Вы проиграли! Загаданное число было: " И_ЕЩЁ_НЕ_ЗАБУДЬ загаданное_число;</code></pre>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-lightbulb"></i> Совет</h4>
+                    <p>Используйте комментарии для объяснения сложных частей кода:</p>
+                    <div class="code-block">
+                        <pre><code class="language-casino">НАЧАТЬ_КОММЕНТАРИЙ
+    Этот блок кода реализует алгоритм
+    определения выигрышной комбинации
+ЗАКОНЧИТЬ_КОММЕНТАРИЙ</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>CasinoIDE</h3>
+                    <p>Лучшая среда разработки для уникального языка программирования Casino++</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Ресурсы</h4>
+                    <ul>
+                        <li><a href="documentation.html">Документация</a></li>
+                        <li><a href="#">Видеоуроки</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Скачать</h4>
+                    <ul>
+                        <li><a href="#">CasinoIDE для Windows</a></li>
+                    </ul>
+                </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к якорям
+        document.querySelectorAll('.doc-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Удаляем активный класс у всех ссылок
+                document.querySelectorAll('.doc-nav a').forEach(a => {
+                    a.classList.remove('active');
+                });
+                
+                // Добавляем активный класс текущей ссылке
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 120,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Подсветка активного раздела при прокрутке
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.doc-section');
+            const navLinks = document.querySelectorAll('.doc-nav a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Регистрация подсветки синтаксиса для Casino++
+        hljs.registerLanguage('casino', function(hljs) {
+            const KEYWORDS = {
+                keyword: 'ИМПОРТИРОВАТЬ_CASINOCLIENT.CASINO++ ЧИСЛО СТРОКА МАССИВ САЛАТИК ЦИТАТУ_НА_ЭКРАН ЗАПРОСИТЬ_ЦИТАТУ ПЖЖПЖПЖ_СТАВЬ_НА ДЕПАЙ_РУЛЕТКУ ПРОВЕРИТЬ_НА_НУРСУЛТАН ПРОВЕРИТЬ_НА_ДРУГОЙ_ЧИТ ЕСЛИ_НЕТ_НУРСУЛТАНА И_ЕЩЁ_НЕ_ЗАБУДЬ ПОКА_ДЕПАЕТ ПОКРУТИЛО_ПО_КРУГУ ВКУСНЫЙ НЕВКУСНЫЙ ВЫЙТИ_ОТСЮДА НАЧАТЬ_КОММЕНТАРИЙ ЗАКОНЧИТЬ_КОММЕНТАРИЙ',
+                literal: 'true false'
+            };
+            
+            return {
+                name: 'Casino++',
+                case_insensitive: false,
+                keywords: KEYWORDS,
+                contains: [
+                    hljs.QUOTE_STRING_MODE,
+                    hljs.C_NUMBER_MODE,
+                    hljs.COMMENT(
+                        'НАЧАТЬ_КОММЕНТАРИЙ',
+                        'ЗАКОНЧИТЬ_КОММЕНТАРИЙ',
+                        {
+                            contains: ['self']
+                        }
+                    )
+                ]
+            };
+        });
+    </script>
+</body>
+</html>
